@@ -21,21 +21,36 @@ const lines = [
   "And it stayed."
 ];
 
+const emphasized = new Set([0, 10, 19]);
+
 export default function Home() {
   return (
     <main className="page">
       <div className="ambient ambient-left" />
       <div className="ambient ambient-right" />
+      <div className="grain" />
 
       <section className="letter">
+        <div className="ornament" aria-hidden="true">
+          <span />
+          <span />
+          <span />
+        </div>
         <p className="tag">a little confession</p>
         <h1>For You</h1>
         <figure className="photo-section">
+          <div className="photo-glow" />
           <img src="/us.jpeg" alt="Your favorite photo together" className="photo-frame" />
-          {/* <figcaption>replace this with your photo in `public/photo-placeholder.svg`</figcaption> */}
+          <figcaption>the moment that made everything feel different</figcaption>
         </figure>
-        {lines.map((line) => (
-          <p key={line}>{line}</p>
+        {lines.map((line, index) => (
+          <p
+            key={line}
+            className={emphasized.has(index) ? "line line-emphasis" : "line"}
+            style={{ animationDelay: `${index * 70}ms` }}
+          >
+            {line}
+          </p>
         ))}
       </section>
     </main>
